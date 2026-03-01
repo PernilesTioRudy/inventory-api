@@ -3,6 +3,7 @@ const { body } = require('express-validator');
 const ctrl = require('../controllers/stockMovimientoController');
 const protect = require('../middleware/auth');
 const validate = require('../middleware/validate');
+const upload = require('../middleware/upload');
 
 const createValidation = [
   body('producto').isMongoId().withMessage('Valid product ID required'),
@@ -16,6 +17,8 @@ router.use(protect);
 router.route('/')
   .get(ctrl.getAll)
   .post(createValidation, validate, ctrl.create);
+
+router.post('/batch', upload.single('factura'), ctrl.batchCreate);
 
 router.route('/:id')
   .get(ctrl.getOne)

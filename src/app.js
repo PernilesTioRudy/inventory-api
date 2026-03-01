@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const morgan = require('morgan');
+const path = require('path');
 
 const apiRoutes = require('./routes/index');
 const errorHandler = require('./middleware/errorHandler');
@@ -18,6 +19,9 @@ app.use(express.json());
 
 // Routes
 app.use('/api/v1', apiRoutes);
+
+// Static uploads
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // 404 handler
 app.use((req, res) => {

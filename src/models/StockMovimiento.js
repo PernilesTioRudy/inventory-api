@@ -38,6 +38,10 @@ const stockMovimientoSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
+    comprobante: {
+      filename:     { type: String },
+      originalName: { type: String },
+    },
   },
   { timestamps: true }
 );
