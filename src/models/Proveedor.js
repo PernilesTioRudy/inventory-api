@@ -12,7 +12,10 @@ const proveedorSchema = new mongoose.Schema(
       type: String,
       trim: true,
       lowercase: true,
-      match: [/^\S+@\S+\.\S+$/, 'Invalid email format'],
+      validate: {
+        validator: (v) => !v || /^\S+@\S+\.\S+$/.test(v),
+        message: 'Invalid email format',
+      },
     },
     telefono: {
       type: String,
